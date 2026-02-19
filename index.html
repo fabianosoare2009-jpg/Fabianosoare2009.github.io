@@ -1,6 +1,98 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+    
+    <script>
+function toggleMenu() {
+    var menu = document.getElementById("menu");
+    menu.classList.toggle("ativo");
+}
+</script>
+    
 <head>
+    
+    <style>
+.menu-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 1001;
+    color: white;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    right: -220px;
+    width: 200px;
+    height: 100%;
+    background: #111;
+    transition: 0.4s;
+    padding-top: 60px;
+}
+
+.menu a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.menu.ativo {
+    right: 0;
+}
+</style>
+    
+    
+    <style>
+body {
+    margin: 0;
+    background-color: #0f0f0f;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+}
+
+/* Botão do menu */
+.menu-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Menu lateral */
+.menu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #111;
+    padding-top: 80px;
+    transition: 0.4s;
+}
+
+.menu a {
+    display: block;
+    color: #e0e0e0;
+    text-decoration: none;
+    padding: 15px 20px;
+    border-bottom: 1px solid #222;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background-color: #8b0000;
+}
+
+/* Classe que ativa o menu */
+.menu.ativo {
+    right: 0;
+}
+</style>
 <meta charset="UTF-8">
 <title>Fabiano Soares - Autor</title>
 <link rel="stylesheet" href="style.css">
@@ -9,7 +101,15 @@
 </head>
 
 <body>
+ 
+ <div class="menu-btn" onclick="toggleMenu()">⋮</div>
 
+<div class="menu" id="menu">
+    <a href="index.html">Início</a>
+    <a href="previa.html">Prévia</a>
+    <a href="personagens.html">Personagens</a>
+</div>
+ 
 <div class="container">
 
 <header>
@@ -33,7 +133,7 @@
         vira razão para destruir, nasce o abismo e às vezes ambos são a mesma pessoa.”
         </p>
 
-        <a class="botao" href="previa.html">Prévia</a>
+<a class="botao" href="previa.html">Previa</a>
     </div>
 
 </section>
