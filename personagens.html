@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personagens - Abismo da Perdição</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== FUNDO ANIMADO ===== */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top, #1a1a1a, #0a0a0a 70%);
+    color: #e0e0e0;
+    overflow-x: hidden;
+    animation: fundoRespira 12s infinite alternate ease-in-out;
+}
+
+@keyframes fundoRespira {
+    from { background-position: left; }
+    to { background-position: right; }
+}
+
+/* ===== TÍTULO ===== */
+.titulo-principal {
+    text-align: center;
+    padding-top: 120px;
+    font-family: 'Cinzel', serif;
+    font-size: 42px;
+    letter-spacing: 4px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1s ease forwards;
+}
+
+.titulo-principal::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #8b0000, transparent);
+    margin: 15px auto 0;
+}
+
+/* ===== MENU ===== */
+.menu-btn {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 1001;
+    color: white;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 250px;
+    height: 100%;
+    background: rgba(15,15,15,0.98);
+    backdrop-filter: blur(6px);
+    transition: 0.4s ease;
+    padding-top: 90px;
+}
+
+.menu a {
+    display: block;
+    padding: 18px 25px;
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background: #8b0000;
+    color: white;
+}
+
+.menu.ativo {
+    right: 0;
+}
+
+/* ===== GRID ===== */
+.container {
+    max-width: 1100px;
+    margin: 60px auto 100px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 40px;
+}
+
+/* ===== CARDS ===== */
+.personagem {
+    background: rgba(25,25,25,0.75);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(139,0,0,0.2);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.4s ease;
+}
+
+.personagem.visible {
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.personagem:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+/* ===== VILÃO ===== */
+.vilao {
+    border: 1px solid rgba(255,0,0,0.4);
+    animation: pulsar 3s infinite ease-in-out;
+}
+
+/* ===== LUANA (Sensitiva) ===== */
+.sensitiva {
+    border: 1px solid rgba(140, 0, 200, 0.4);
+    position: relative;
+}
+
+.sensitiva::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(160, 0, 255, 0.15), transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.4s ease;
+}
+
+.sensitiva:hover::before {
+    opacity: 1;
+}
+
+.sensitiva .frase {
+    color: #c77dff;
+}
+
+/* ===== CLARA (Regeneração) ===== */
+.regeneracao {
+    border: 1px solid rgba(0, 200, 120, 0.4);
+    position: relative;
+    animation: curaPulsando 4s infinite ease-in-out;
+}
+
+.regeneracao::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 40%, rgba(0,255,150,0.15), transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.4s ease;
+}
+
+.regeneracao:hover::before {
+    opacity: 1;
+}
+
+.regeneracao .frase {
+    color: #00ffb3;
+}
+
+@keyframes curaPulsando {
+    0% { box-shadow: 0 0 5px rgba(0,255,150,0.2); }
+    50% { box-shadow: 0 0 20px rgba(0,255,150,0.6); }
+    100% { box-shadow: 0 0 5px rgba(0,255,150,0.2); }
+}
+@keyframes pulsar {
+    0% { box-shadow: 0 0 5px darkred; }
+    50% { box-shadow: 0 0 20px red; }
+    100% { box-shadow: 0 0 5px darkred; }
+}
+
+/* ===== IMAGEM ===== */
+.foto {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.personagem:hover .foto {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* ===== CONTEÚDO ===== */
+.conteudo {
+    padding: 25px;
+}
+
+h2 {
+    margin-top: 0;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.status {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.frase {
+    font-style: italic;
+    color: #b22222;
+    margin-top: 20px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* ===== ANIMAÇÃO PADRÃO ===== */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<div class="menu" id="menu">
+    <a href="index.html">Início</a>
+    <a href="previa.html">Prévia</a>
+    <a href="personagens.html">Personagens</a>
+</div>
+
+<h1 class="titulo-principal">PERSONAGENS</h1>
+
+<div class="container">
+
+    <div class="personagem regeneracao">
+        <img src="clara.jpg" class="foto">
+        <div class="conteudo">
+            <h2>Clara</h2>
+            <ul class="status">
+                <li><strong>Idade:</strong> 18</li>
+                <li><strong>Habilidade:</strong> Regeneração</li>
+                <li><strong>Estado Mental:</strong> Competente</li>
+                <li><strong>Organização:</strong> BDF</li>
+            </ul>
+            <p>Uma jovem marcada pelo abismo, dividida entre proteger e destruir.</p>
+            <p class="frase">"Entre o bem e o mal, prefiro completar minha missão."</p>
+        </div>
+    </div>
+
+    <div class="personagem">
+        <img src="matheus.jpg" class="foto">
+        <div class="conteudo">
+            <h2>Matheus</h2>
+            <ul class="status">
+                <li><strong>Idade:</strong> 17</li>
+                <li><strong>Habilidade:</strong> Chamas</li>
+                <li><strong>Estado Mental:</strong> Instável</li>
+                <li><strong>Organização:</strong> BDF</li>
+            </ul>
+            <p>Apenas um garoto forçado a viver uma vida agoniante desde o nascimento.</p>
+            <p class="frase">"O abismo é apenas um espelho dos meus próprios traumas."</p>
+        </div>
+    </div>
+
+    <div class="personagem sensitiva">
+    <img src="luana.jpg" class="foto">
+    <div class="conteudo">
+        <h2>Luana</h2>
+        <ul class="status">
+            <li><strong>Idade:</strong> 17</li>
+            <li><strong>Habilidade:</strong> incentivo e leitura mental</li>
+            <li><strong>Estado Mental:</strong> facilmente social</li>
+            <li><strong>Organização:</strong> BDF</li>
+        </ul>
+        <p>Alguem capaz de perceber quando ha maldade no ar,mas não se engane. ela não é tão santa.</p>
+        <p class="frase">"Em um mundo cheio de dor e perdas, eu escolhi seguir em frente."</p>
+    </div>
+    
+    
+</div>
+
+<script>
+
+/* MENU */
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("ativo");
+}
+
+/* REVEAL AO SCROLL */
+const elementos = document.querySelectorAll(".personagem");
+
+function revelar() {
+    const trigger = window.innerHeight * 0.85;
+    elementos.forEach(el => {
+        const topo = el.getBoundingClientRect().top;
+        if (topo < trigger) {
+            el.classList.add("visible");
+        }
+    });
+}
+
+window.addEventListener("scroll", revelar);
+window.addEventListener("load", revelar);
+
+</script>
+
+</body>
+</html>
